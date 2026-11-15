@@ -31,7 +31,7 @@
         <message>
             <location filename="../rust_strings.h" line="12" />
             <source>Downloading the update · %1 of %2</source>
-            <translation>%2のアップデート・%1をダウンロードしています</translation>
+            <translation>更新をダウンロード中 · %2中%1</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="13" />
@@ -46,12 +46,12 @@
         <message>
             <location filename="../rust_strings.h" line="15" />
             <source>My phone's colors</source>
-            <translation>私のスマートフォンの色</translation>
+            <translation>スマートフォンの配色</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="16" />
             <source>My phone's colors (%1)</source>
-            <translation>私のスマートフォンの色 (%1)</translation>
+            <translation>スマートフォンの配色（%1）</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="17" />
@@ -61,12 +61,12 @@
         <message>
             <location filename="../rust_strings.h" line="18" />
             <source>NectarLink · %1 devices connected</source>
-            <translation>NectarLink · %1 デバイスが接続されました</translation>
+            <translation>NectarLink · %1台に接続中</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="19" />
             <source>NectarLink · 1 device connected</source>
-            <translation>NectarLink · 1 台のデバイスが接続されました</translation>
+            <translation>NectarLink · 1台に接続中</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="20" />
@@ -1293,7 +1293,7 @@
         <message>
             <location filename="../rust_strings.h" line="150" />
             <source>Toggle Do Not Disturb</source>
-            <translation>おやすみモードの切り替え</translation>
+            <translation>サイレントモードの切り替え</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="151" />
@@ -2895,7 +2895,7 @@
         <message>
             <location filename="../../qml/pages/FeaturesGuidePage.qml" />
             <source>Assist (Accessibility) or Elevated (Wireless debugging) on phone</source>
-            <translation>スマートフォンでのアシスト (アクセシビリティ) または 拡張権限 (ワイヤレス デバッグ)</translation>
+            <translation>スマートフォンでのアシスト (ユーザー補助) または 拡張権限 (ワイヤレス デバッグ)</translation>
         </message>
         <message>
             <location filename="../../qml/pages/FeaturesGuidePage.qml" />
@@ -2905,7 +2905,7 @@
         <message>
             <location filename="../../qml/pages/FeaturesGuidePage.qml" />
             <source>Toggle Do Not Disturb, ringer mode, flashlight, volume, brightness, Wi-Fi, Bluetooth, and Find my phone.</source>
-            <translation>おやすみモード、着信音モード、懐中電灯、音量、明るさ、Wi-Fi、Bluetooth、および電話を探すを切り替えます。</translation>
+            <translation>サイレントモード、着信音モード、懐中電灯、音量、明るさ、Wi-Fi、Bluetooth、および電話を探すを切り替えます。</translation>
         </message>
         <message>
             <location filename="../../qml/pages/FeaturesGuidePage.qml" />
@@ -3249,9 +3249,9 @@ Assist mode (Android Accessibility Service)
 - 個別のデスクトップ ウィンドウ (仮想ディスプレイ) で個々のスマートフォンアプリをストリーミングします。
 - 追加のシステムのクイック切り替えを制御します。
 
-アシストモード (Android アクセシビリティサービス)
+アシストモード (Android ユーザー補助サービス)
 - PC からスマートフォンを制御するときに、マウスのクリック、スクロール、タッチ ジェスチャを挿入します。
-- NectarLink は、アクセシビリティ サービスを通じて画面テキストを読み取ったり、キーストロークを記録したりすることはありません。</translation>
+- NectarLink は、ユーザー補助 サービスを通じて画面テキストを読み取ったり、キーストロークを記録したりすることはありません。</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="286" />
@@ -3281,7 +3281,7 @@ Capability tiers on Android
 Android の機能層
 - 標準モード: 標準の Android 権限でインストール直後に動作します。
 - 拡張権限 モード (オプション): ワイヤレス デバッグ (電話アプリで一度セットアップ) または独自のウィンドウでの電話アプリの root、画面キャプチャ プロンプトなしのミラーリング、およびその他の電話コントロールを使用します。
-- アシスト モード (オプション): リモート入力を有効にした場合にのみ、Android アクセシビリティ サービスを使用して、PC のマウスとキーボードでスマートフォンを制御できるようにします。</translation>
+- アシスト モード (オプション): リモート入力を有効にした場合にのみ、Android ユーザー補助 サービスを使用して、PC のマウスとキーボードでスマートフォンを制御できるようにします。</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="288" />
@@ -3423,7 +3423,7 @@ Where to find it
 What it needs
 - Volume, flashlight, and Find My Phone work in Standard mode; Do Not Disturb requires Notification Policy access; Wi-Fi and Bluetooth toggles use Elevated mode on newer Android versions.</source>
             <translation>何をするのか
-スマートフォンの「おやすみモード」、着信音モード (サウンド、振動、サイレント)、懐中電灯、メディアの音量、画面の明るさ、Wi-Fi、Bluetooth、および「電話を探す」の着信音を PC から制御します。
+スマートフォンの「サイレントモード」、着信音モード (サウンド、振動、サイレント)、懐中電灯、メディアの音量、画面の明るさ、Wi-Fi、Bluetooth、および「電話を探す」の着信音を PC から制御します。
 
 どこで見つけられますか
 - ホーム › 電話コントロールと電話の検索。
@@ -3510,7 +3510,7 @@ What it needs
 - コマンド パレット › PC キーボードを使用してスマートフォンに入力します。
 
 必要なもの
-- スマートフォンのアシスト モード (アクセシビリティ サービス)、NectarLink 入力方法、または 拡張権限 モード。</translation>
+- スマートフォンのアシスト モード (ユーザー補助 サービス)、NectarLink 入力方法、または 拡張権限 モード。</translation>
         </message>
         <message>
             <location filename="../rust_strings.h" line="313" />
@@ -5159,7 +5159,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/components/LockChip.qml" line="46" />
             <source>On your phone, open NectarLink › Settings › Control from your PC and turn on the Accessibility service.</source>
-            <translation>スマートフォンで、 NectarLink › 設定 › PC からの制御 を開き、アクセシビリティ サービスをオンにします。</translation>
+            <translation>スマートフォンで、 NectarLink › 設定 › PC からの制御 を開き、ユーザー補助 サービスをオンにします。</translation>
         </message>
         <message>
             <location filename="../../qml/components/LockChip.qml" line="48" />
@@ -6294,7 +6294,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="81" />
             <source>Pairing didn't work</source>
-            <translation>ペアリングが機能しませんでした</translation>
+            <translation>ペアリングできませんでした</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="82" />
@@ -6333,13 +6333,13 @@ Windows アプリからスマートフォンのカメラをトリガーして写
             <location filename="../../qml/pages/PairingPanel.qml" line="135" />
             <location filename="../../qml/pages/PairingPanel.qml" line="209" />
             <source>Code refreshes in %1:%2 · Works on this network</source>
-            <translation>%1:%2 でコードが更新されます · このネットワークで動作します</translation>
+            <translation>コードの更新まで %1:%2 · 同じネットワークで使用可能</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="143" />
             <location filename="../../qml/pages/PairingPanel.qml" line="217" />
             <source>Pair nearby instead</source>
-            <translation>代わりに近くでペアリングします</translation>
+            <translation>近くのデバイスとペアリングする</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="187" />
@@ -6354,7 +6354,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="235" />
             <source>On your phone, open NectarLink and choose “Pair nearby”. It shows up here.</source>
-            <translation>スマートフォンで NectarLink を開き、「近くでペアリング」を選択します。それはここに現れます。</translation>
+            <translation>スマートフォンでNectarLinkを開き、「近くのデバイスとペアリング」を選択してください。この一覧に表示されます。</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="265" />
@@ -6369,7 +6369,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="281" />
             <source>Show the QR code</source>
-            <translation>QRコードを見せる</translation>
+            <translation>QRコードを表示</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="296" />
@@ -6384,7 +6384,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="312" />
             <source>Make sure %1 shows the same code. This keeps anyone else from pairing in between.</source>
-            <translation>%1 が同じコードを示していることを確認してください。これにより、他の人が途中でペアリングできなくなります。</translation>
+            <translation>%1 に同じコードが表示されていることを確認してください。第三者によるペアリングの割り込みを防ぎます。</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="313" />
@@ -6394,12 +6394,12 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="320" />
             <source>They don't match</source>
-            <translation>一致しません</translation>
+            <translation>コードが一致しません</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="321" />
             <source>Codes match</source>
-            <translation>コードが一致する</translation>
+            <translation>コードが一致しています</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="344" />
@@ -6409,7 +6409,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="347" />
             <source>Pairing was cancelled or the codes didn't match, so nothing was paired. Try again.</source>
-            <translation>ペアリングがキャンセルされたか、コードが一致しないため、何もペアリングされませんでした。もう一度やり直してください。</translation>
+            <translation>操作がキャンセルされたか、コードが一致しなかったため、ペアリングされませんでした。もう一度お試しください。</translation>
         </message>
         <message>
             <location filename="../../qml/pages/PairingPanel.qml" line="348" />
@@ -8767,7 +8767,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="67" />
             <source>Install NectarLink in</source>
-            <translation>NectarLinkをインストールします</translation>
+            <translation>NectarLinkのインストール先</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="120" />
@@ -8795,17 +8795,17 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="218" />
             <source>Uninstalling NectarLink</source>
-            <translation>NectarLinkのアンインストール</translation>
+            <translation>NectarLinkをアンインストール中</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="219" />
             <source>Updating NectarLink</source>
-            <translation>NectarLink を更新しています</translation>
+            <translation>NectarLinkを更新中</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="220" />
             <source>Installing NectarLink</source>
-            <translation>NectarLinkのインストール</translation>
+            <translation>NectarLinkをインストール中</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="221" />
@@ -8815,7 +8815,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="236" />
             <source>Sorry to see you go. This uninstalls NectarLink and deletes its settings and pairings on this PC. Files you received stay in %1.</source>
-            <translation>行ってしまうのは残念だ。これにより、NectarLink がアンインストールされ、この PC 上のその設定とペアリングが削除されます。受信したファイルは %1 に残ります。</translation>
+            <translation>NectarLinkをアンインストールし、このPCの設定とペアリングを削除します。受信したファイルは %1 に残ります。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="238" />
@@ -8835,7 +8835,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="243" />
             <source>Your Android phone and your PC, working as one.</source>
-            <translation>Android スマートフォンと PC が 1 つとして機能します。</translation>
+            <translation>AndroidスマートフォンとPCを、ひとつにつなぐ。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="285" />
@@ -8865,7 +8865,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="298" />
             <source>Keep NectarLink</source>
-            <translation>NectarLink を維持する</translation>
+            <translation>アンインストールしない</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="356" />
@@ -8891,12 +8891,12 @@ Windows アプリからスマートフォンのカメラをトリガーして写
             <location filename="../../qml/setup/SetupWindow.qml" line="436" />
             <location filename="../../qml/setup/SetupWindow.qml" line="581" />
             <source>What this installs</source>
-            <translation>これがインストールするもの</translation>
+            <translation>インストール内容</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="469" />
             <source>NectarLink is uninstalled</source>
-            <translation>NectarLink はアンインストールされます</translation>
+            <translation>NectarLinkをアンインストールしました</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="469" />
@@ -8931,22 +8931,22 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="591" />
             <source>NectarLink goes into Program Files, or the folder you choose, for everyone on this PC. Setup also:</source>
-            <translation>NectarLink は、この PC 上の全員の Program Files、または選択したフォルダーに入ります。セットアップも次のように行います。</translation>
+            <translation>NectarLinkをProgram Filesまたは指定したフォルダーにインストールし、このPCの全ユーザーが使用できるようにします。次の設定も行います。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="593" />
             <source>adds a task that installs updates without an administrator prompt, where only administrators can change the folder</source>
-            <translation>管理者のみがフォルダーを変更できる、管理者プロンプトを表示せずに更新をインストールするタスクを追加します。</translation>
+            <translation>管理者だけが変更できるフォルダーでは、管理者の確認画面を表示せず更新をインストールするタスクを追加します。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="592" />
             <source>allows it through Windows Firewall on private networks, so your phone can connect</source>
-            <translation>プライベート ネットワーク上の Windows ファイアウォールを通過できるようにするため、スマートフォンが接続できるようになります</translation>
+            <translation>スマートフォンから接続できるよう、プライベートネットワークでのWindowsファイアウォールの通信を許可します。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="594" />
             <source>adds a Start menu shortcut, and a desktop one if you leave that ticked, and starts it with Windows (turn this off in Settings)</source>
-            <translation>[スタート] メニューのショートカットを追加し、チェックを入れたままにした場合はデスクトップのショートカットを追加し、Windows で起動します (これを [設定] でオフにします)</translation>
+            <translation>スタートメニューにショートカットを追加します。指定した場合はデスクトップにも追加します。Windowsへのサインイン時に自動起動します（設定でオフにできます）。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="595" />
@@ -8956,7 +8956,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="596" />
             <source>It checks GitHub for updates once a day, which you can turn off in Settings. Otherwise your phone and PC only talk to each other.</source>
-            <translation>GitHub の更新を 1 日 1 回チェックしますが、これは [設定] でオフにすることができます。そうしないと、スマートフォンと PC は相互に通信するだけになります。</translation>
+            <translation>GitHubで更新を1日1回確認します。この確認は設定でオフにできます。それ以外は、スマートフォンとPCの間でのみ通信します。</translation>
         </message>
         <message>
             <location filename="../../qml/setup/SetupWindow.qml" line="603" />
@@ -10170,7 +10170,7 @@ Windows アプリからスマートフォンのカメラをトリガーして写
         <message>
             <location filename="../../qml/pages/WalkthroughPage.qml" />
             <source>Notifications are muted or Do Not Disturb is active.</source>
-            <translation>通知がミュートされているか、おやすみモードがアクティブになっています。</translation>
+            <translation>通知がミュートされているか、サイレントモードがアクティブになっています。</translation>
         </message>
         <message>
             <location filename="../../qml/pages/WalkthroughPage.qml" />
