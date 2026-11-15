@@ -60,6 +60,9 @@ class LocalesTest {
         assertEquals("de", AppLanguage.normalize("de-CH"))
         assertEquals("tr", AppLanguage.normalize("tr"))
         assertEquals("tr", AppLanguage.normalize("tr-TR"))
+        assertEquals("ja", AppLanguage.normalize("ja"))
+        assertEquals("ja", AppLanguage.normalize("ja-JP"))
+        assertEquals("ja", AppLanguage.normalize("ja-Jpan-JP"))
     }
 
     @Test

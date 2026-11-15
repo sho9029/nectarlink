@@ -4,6 +4,14 @@ All notable changes to NectarLink. Versions follow
 [semantic versioning](https://semver.org); before 1.0, a minor version may
 change things that need a step from you, and its notes say so.
 
+## Personal Japanese build (2026-11-15)
+
+- Japanese Android and Windows catalogues, language selection, and format-argument validation,
+  prepared with OpenAI Codex for sho9029. Machine-assisted draft with reviewed UI terminology;
+  on-device review remains necessary. Based on the unmodified v0.1.5 core.
+- An opt-in unsigned Android build and encrypted personal CI artifacts, for offline signing
+  and private delivery. No public release is created.
+
 ## 0.1.5 (2026-11-05)
 
 The PC app on Linux and on Windows on ARM, Phone as microphone, Play on

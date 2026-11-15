@@ -74,7 +74,10 @@ android {
 
     buildTypes {
         release {
-            signingConfig = if (keystore != null) signingConfigs.getByName("release") else signingConfigs.getByName("debug")
+            // Personal builds can leave signing to the owner's offline key. The
+            // keystore never needs to be uploaded to a public fork or CI runner.
+            signingConfig = if (providers.gradleProperty("nectarlink.unsigned").orNull == "true") null
+                else if (keystore != null) signingConfigs.getByName("release") else signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

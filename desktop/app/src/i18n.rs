@@ -9,8 +9,14 @@ use std::path::{Path, PathBuf};
 
 /// Languages the app speaks, as Settings offers them: a locale name ("" for
 /// the system's) and how the language calls itself.
-pub const LANGUAGES: &[(&str, &str)] =
-    &[("", ""), ("en", "English"), ("de", "Deutsch"), ("zh_CN", "简体中文"), ("tr", "Türkçe")];
+pub const LANGUAGES: &[(&str, &str)] = &[
+    ("", ""),
+    ("en", "English"),
+    ("de", "Deutsch"),
+    ("zh_CN", "简体中文"),
+    ("tr", "Türkçe"),
+    ("ja", "日本語"),
+];
 
 /// [`LANGUAGES`] without the system's, as JSON for Settings: `[{ code, name }]`.
 pub fn languages_json() -> String {
@@ -156,6 +162,8 @@ mod tests {
         assert_eq!(listed[0], serde_json::json!({ "code": "en", "name": "English" }));
         assert!(listed.iter().all(|l| l["code"] != ""), "the system's isn't a choice in the list");
         assert!(!is_known("xx"));
+        assert!(is_known("ja"));
+        assert!(listed.iter().any(|l| l["code"] == "ja" && l["name"] == "日本語"));
     }
 
     /// A language Settings offers is fully translated: languages still being
