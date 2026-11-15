@@ -108,6 +108,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Restore Android signing key from repository Secrets
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ]; then
+            echo "::error::Register ANDROID_KEYSTORE and ANDROID_KEYSTORE_PASSWORD in repository Actions Secrets first."
+            exit 1
+          fi
+          umask 077
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/personal-signing.p12"
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
@@ -129,18 +142,29 @@ jobs:
           cmdline-tools-version: "16111833"
           packages: "platforms;android-37.0 ndk;30.0.16248370 build-tools;37.0.0"
       - uses: gradle/actions/setup-gradle@v6
-      - name: Language tests, lint, and unsigned release APK
+      - name: Language tests, lint, and signed release APK
         working-directory: android
-        # The owner's signing key stays offline. The returned APK is signed locally.
-        run: ./gradlew --no-daemon testDebugUnitTest lintRelease assembleRelease -Pnectarlink.abis=arm64-v8a -Pnectarlink.unsigned=true
+        env:
+          NECTARLINK_KEYSTORE: ${{ runner.temp }}/personal-signing.p12
+          NECTARLINK_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: ./gradlew --no-daemon testDebugUnitTest lintRelease assembleRelease -Pnectarlink.abis=arm64-v8a
       - name: Check ABI and embedded Japanese resources
         run: |
-          apk=android/app/build/outputs/apk/release/app-release-unsigned.apk
+          set -euo pipefail
+          apk=android/app/build/outputs/apk/release/app-release.apk
           test -s "$apk"
+          "$ANDROID_HOME/build-tools/37.0.0/apksigner" verify --verbose --print-certs "$apk" > "$RUNNER_TEMP/signature.txt"
+          cat "$RUNNER_TEMP/signature.txt"
+          grep -F '9862c286a26aa671c53ed7040fd35848fb5c189a37ece7a611e5bcc2f77dc34f' "$RUNNER_TEMP/signature.txt"
+          "$ANDROID_HOME/build-tools/37.0.0/zipalign" -c -P 16 4 "$apk"
           unzip -l "$apk" | grep 'lib/arm64-v8a/libnectarlink_ffi.so'
           "$ANDROID_HOME/build-tools/37.0.0/aapt2" dump configurations "$apk" | grep -E '(^|[ -])ja([ -]|$)'
+      - name: Remove signing key from runner
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/personal-signing.p12"
       - name: Encrypt personal APK
-        run: python scripts/encrypt-personal-artifacts.py --output out/encrypted "android/app/build/outputs/apk/release/*-unsigned.apk"
+        run: python scripts/encrypt-personal-artifacts.py --output out/encrypted "android/app/build/outputs/apk/release/app-release.apk"
       - uses: actions/upload-artifact@v7
         with:
           name: japanese-android-arm64-encrypted
