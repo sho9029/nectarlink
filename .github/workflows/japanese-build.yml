@@ -1,0 +1,140 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Japanese personal build
+
+on:
+  push:
+    branches: [ja-v0.1.5]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: japanese-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  QT_VERSION: "6.12.0"
+
+jobs:
+  translations:
+    name: Japanese catalogue checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: python scripts/check-japanese.py
+      - name: Compile the Japanese Qt catalogue
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qt6-l10n-tools
+          /usr/lib/qt6/bin/lrelease desktop/app/i18n/nectarlink_ja.ts -qm /tmp/nectarlink_ja.qm
+
+  windows:
+    name: Windows (${{ matrix.arch }})
+    needs: translations
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Rust toolchain
+        shell: pwsh
+        run: |
+          rustup show active-toolchain
+          if ('${{ matrix.arch }}' -eq 'arm64') {
+            rustup target add aarch64-pc-windows-msvc
+          }
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: japanese-windows-${{ matrix.arch }}
+      - name: Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: windows
+          target: desktop
+          arch: ${{ matrix.arch == 'arm64' && 'win64_msvc2022_arm64_cross_compiled' || 'win64_msvc2022_64' }}
+          cache: true
+          aqtsource: git+https://github.com/miurahr/aqtinstall.git
+      - name: Japanese language tests
+        if: matrix.arch == 'x64'
+        run: cargo test --locked --release -p nectarlink-desktop i18n::tests
+      - name: NSIS
+        shell: pwsh
+        run: |
+          if (-not (Get-Command makensis -ErrorAction SilentlyContinue) -and
+              -not (Test-Path "${env:ProgramFiles(x86)}\NSIS\makensis.exe")) {
+            choco install nsis --yes --no-progress
+          }
+      - name: Build the installer
+        shell: pwsh
+        run: ./scripts/package.ps1 -Arch '${{ matrix.arch }}'
+      - name: Check installation and the main window
+        if: matrix.arch == 'x64'
+        shell: pwsh
+        run: |
+          ./scripts/ui-check.ps1
+          ./scripts/smoke-installer.ps1
+      - name: Encrypt personal binaries
+        run: python scripts/encrypt-personal-artifacts.py --output out/encrypted "target/package/*-setup.exe"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: japanese-windows-${{ matrix.arch }}-encrypted
+          path: out/encrypted/*
+          if-no-files-found: error
+          retention-days: 14
+
+  android:
+    name: Android (Nothing Phone 3, arm64)
+    needs: translations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Rust toolchain and Android target
+        run: |
+          rustup show active-toolchain
+          rustup target add aarch64-linux-android
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: japanese-android-arm64
+      - name: cargo-ndk
+        run: cargo install --locked cargo-ndk
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: android-actions/setup-android@v4
+        with:
+          cmdline-tools-version: "16111833"
+          packages: "platforms;android-37.0 ndk;30.0.16248370 build-tools;37.0.0"
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Language tests, lint, and unsigned release APK
+        working-directory: android
+        # The owner's signing key stays offline. The returned APK is signed locally.
+        run: ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease -Pnectarlink.abis=arm64-v8a -Pnectarlink.unsigned=true
+      - name: Check ABI and embedded Japanese resources
+        run: |
+          apk=android/app/build/outputs/apk/release/app-release-unsigned.apk
+          test -s "$apk"
+          unzip -l "$apk" | grep 'lib/arm64-v8a/libnectarlink_ffi.so'
+          "$ANDROID_HOME/build-tools/37.0.0/aapt2" dump configurations "$apk" | grep -E '(^|[ -])ja([ -]|$)'
+      - name: Encrypt personal APK
+        run: python scripts/encrypt-personal-artifacts.py --output out/encrypted "android/app/build/outputs/apk/release/*-unsigned.apk"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: japanese-android-arm64-encrypted
+          path: out/encrypted/*
+          if-no-files-found: error
+          retention-days: 14
