@@ -4,14 +4,21 @@ name: Japanese personal build
 on:
   push:
     branches: [ja-v0.1.5]
+    paths-ignore: ['.github/workflows/japanese-build.yml']
   workflow_dispatch:
+    inputs:
+      platform:
+        description: Build target
+        type: choice
+        default: all
+        options: [all, android, windows]
 
 permissions:
   contents: read
 
 concurrency:
-  group: japanese-${{ github.ref }}
-  cancel-in-progress: true
+  group: japanese-${{ github.ref }}-${{ inputs.platform || 'all' }}
+  cancel-in-progress: false
 
 env:
   CARGO_TERM_COLOR: always
@@ -35,6 +42,7 @@ jobs:
 
   windows:
     name: Windows (${{ matrix.arch }})
+    if: github.event_name == 'push' || inputs.platform != 'android'
     needs: translations
     runs-on: windows-latest
     strategy:
@@ -95,6 +103,7 @@ jobs:
 
   android:
     name: Android (Nothing Phone 3, arm64)
+    if: github.event_name == 'push' || inputs.platform != 'windows'
     needs: translations
     runs-on: ubuntu-latest
     steps:
@@ -123,7 +132,7 @@ jobs:
       - name: Language tests, lint, and unsigned release APK
         working-directory: android
         # The owner's signing key stays offline. The returned APK is signed locally.
-        run: ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease -Pnectarlink.abis=arm64-v8a -Pnectarlink.unsigned=true
+        run: ./gradlew --no-daemon testDebugUnitTest lintRelease assembleRelease -Pnectarlink.abis=arm64-v8a -Pnectarlink.unsigned=true
       - name: Check ABI and embedded Japanese resources
         run: |
           apk=android/app/build/outputs/apk/release/app-release-unsigned.apk
